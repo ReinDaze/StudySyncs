@@ -2,49 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    //// app/Http/Controllers/ProfileController.php
-    public function edit()
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
-            'user' => Auth::user(),
+            'user' => $request->user(),
+            'status' => session('status'),
         ]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            $data['photo'] = $request->file('photo')->store('profile_photos', 'public');
+        }
+
+        $user->fill($data);
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'Profile updated successfully.');
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'address' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'birthdate' => 'nullable|date',
+            'password' => ['required', 'current_password'],
         ]);
 
-        $user = Auth::user();
-        $user->update($request->only('name', 'email', 'address', 'phone', 'birthdate'));
+        $user = $request->user();
 
-        return Inertia::render('Profile/Edit', [
-            'user' => $user,
-            'success' => 'Profile updated successfully',
-        ]);
-    }
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
 
-    public function destroy()
-    {
-        $user = Auth::user();
+        Auth::logout();
         $user->delete();
 
-        // Log out the user after deleting their account
-        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        // Redirect ke halaman utama atau login page setelah menghapus akun
-        return redirect()->route('login')->with('status', 'Your account has been deleted successfully.');
+        return Redirect::to('/');
     }
-
 }

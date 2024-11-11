@@ -1,67 +1,104 @@
 <template>
-    <AuthenticatedLayout>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-8">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Daftar Soal</h2>
+  <div class="min-h-screen bg-gray-50 p-8 grid gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+    <!-- Header -->
+    <HeaderContent v-if="showHeader" class="col-span-full mb-8"/>
 
-            <!-- Tombol untuk menambah soal -->
-            <div class="mb-6">
-                <Link
-                    href="/soal/add"
-                    class="inline-block bg-green-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-700 transition"
-                >
-                    Tambah Soal
-                </Link>
-            </div>
+    <!-- Profile and Learning Statistics -->
+    <section class="md:col-span-2 lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+      <ProfileCard />
+    </section>
 
-            <!-- Daftar soal -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div
-                    v-for="soal in $page.props.soals"
-                    :key="soal.id"
-                    class="bg-white p-5 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition"
-                >
-                    <p class="font-semibold text-lg text-gray-900 mb-2">{{ soal.soal }}</p>
+    <!-- Learning Style Percentage Overview -->
+    <section class="bg-white p-6 rounded-lg shadow-md lg:col-span-1 md:col-span-1">
+      <LearningHistory />
+    </section>
 
-                    <ul class="list-disc ml-6 text-gray-700">
-                        <li>{{ soal.jawaban_1 }} - <span class="font-medium">Gaya Belajar:</span> {{ soal.gaya_belajar_1 }}</li>
-                        <li>{{ soal.jawaban_2 }} - <span class="font-medium">Gaya Belajar:</span> {{ soal.gaya_belajar_2 }}</li>
-                        <li>{{ soal.jawaban_3 }} - <span class="font-medium">Gaya Belajar:</span> {{ soal.gaya_belajar_3 }}</li>
-                    </ul>
+    <!-- Biodata Section -->
+    <section class="bg-white p-6 rounded-lg shadow-md lg:col-span-1 md:col-span-1">
+      <Biodata />
+    </section>
 
-                    <!-- Tombol aksi -->
-                    <div class="mt-4 flex gap-3">
-                        <button
-                            @click="handleDelete(soal.id)"
-                            class="bg-red-600 text-white py-1 px-4 rounded-md shadow-md hover:bg-red-700 transition"
-                        >
-                            Hapus
-                        </button>
-                        <Link
-                            :href="`/soal/${soal.id}/edit`"
-                            class="bg-blue-600 text-white py-1 px-4 rounded-md shadow-md hover:bg-blue-700 transition"
-                        >
-                            Edit
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+    <!-- Tips Section -->
+    <section class="bg-white p-6 rounded-lg shadow-md lg:col-span-2 md:col-span-2">
+      <TipsCard v-if="showTips"/>
+    </section>
+
+    <!-- Footer -->
+    <FooterContent v-if="showFooter" class="col-span-full mt-8"/>
+  </div>
 </template>
 
-<script setup>
-import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+<script>
+import { Link } from '@inertiajs/vue3'
+import HeaderContent from '@/Components/HeaderContent.vue'
+import FooterContent from '@/Components/FooterContent.vue'
+import ProfileCard from '@/Components/ProfileCard.vue'
+import LearningHistory from '@/Components/LearningHistory.vue'
+import Biodata from '@/Components/Biodata.vue'
+import TipsCard from '@/Components/TipsCard.vue'
 
-const handleDelete = (id) => {
-    if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
-        Inertia.delete(`/soal/${id}`, {
-            onSuccess: () => {
-                // Menampilkan notifikasi atau melakukan tindakan lain setelah berhasil dihapus
-                alert('Soal berhasil dihapus');
-            },
-        });
+export default {
+  name: 'Dashboard',
+  
+  components: {
+    Link,
+    HeaderContent,
+    FooterContent,  
+    ProfileCard,
+    LearningHistory,
+    Biodata,
+    TipsCard,
+  },
+
+  data() {
+    return {
+      showHeader: true,
+      showFooter: true,
+      showTips: true,
     }
-};
+  },
+
+  methods: {
+    isCurrentRoute(path) {
+      return this.$page.url === path
+    }
+  }
+}
 </script>
+
+<style scoped>
+/* Styling for layout adjustment */
+.min-h-screen {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+  .min-h-screen {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .min-h-screen {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+</style>

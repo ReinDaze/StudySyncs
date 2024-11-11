@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\SoalController;
 
+// Halaman utama
 Route::get('/', function () {
-    return Inertia::render('HomeView', [
+    return Inertia::render('LandingPage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -15,40 +16,34 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tes-gaya-belajar', function () {
-    return Inertia::render('TesGayaBelajarView');
-})->name('tes-gaya-belajar');
+// Halaman dashboard
+Route::get('/dashboard', function () { // Ubah '/Dashboard' menjadi '/dashboard'
+    return Inertia::render('Dashboard');
+})->name('dashboard'); // Ubah nama menjadi 'dashboard'
 
-Route::get('/gaya-belajar', function () {
-    return Inertia::render('GayaBelajarView');
-})->name('gaya-belajar');
+// Halaman tes gaya belajar
+Route::get('/tesgayabelajar', function () {
+    return Inertia::render('TesGayaBelajar');
+})->name('tesgayabelajar');
 
+// Halaman tes gaya belajar
 Route::get('/kontak', function () {
-    return Inertia::render('KontakView');
+    return Inertia::render('kontak');
 })->name('kontak');
 
-Route::get('/login', function () {
-    return Inertia::render('LoginView');
-})->name('login');
+// Halaman tes gaya belajar
+Route::get('/Soaluji', function () {
+    return Inertia::render('Soaluji');
+})->name('Soaluji');
 
-// routes/web.php
-
-
+// Rute untuk autentikasi dan profil
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [SoalController::class, 'index'])->name('dashboard');
-    Route::get('/soal/add', [SoalController::class, 'create'])->name('soal.create');
-    Route::post('/soal', [SoalController::class, 'store'])->name('soal.store');
-    Route::get('/soal/{soal}/edit', [SoalController::class, 'edit'])->name('soal.edit');
-    Route::put('/soal/{soal}', [SoalController::class, 'update'])->name('soal.update');
-    Route::delete('/soal/{id}', [SoalController::class, 'destroy'])->name('soal.destroy');
-});
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Rute logout
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 require __DIR__.'/auth.php';

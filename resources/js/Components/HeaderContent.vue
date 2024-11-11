@@ -1,41 +1,45 @@
 <template>
-  <header class="flex flex-wrap gap-5 justify-between my-auto px-14 py-7 w-full bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:max-w-full">
-    <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 animate-pulse">
-            StudySync
-        </h1>
-    <nav class="flex flex-wrap gap-10 items-center max-md:max-w-full">
-      <Link href="/" class="text-xl font-medium text-blue-500 hover:text-blue-700 transition-colors duration-300">
+  <header
+    class="flex flex-wrap items-center justify-between gap-5 px-14 pt-4 pb-11 w-full bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5"
+  >
+    <a href="/" class="text-5xl font-bold text-blue-500 max-md:text-3xl">
+      Studysync
+    </a>
+    <nav class="flex flex-wrap items-center gap-5 max-md:flex-col">
+      <a
+        href="/"
+        class="text-2xl font-medium text-blue-500 max-md:text-xl hover:text-blue-600 transition-colors"
+      >
         Beranda
-      </Link>
-      <Link href="/tes-gaya-belajar" class="text-xl font-medium text-blue-500 hover:text-blue-700 transition-colors duration-300">
+      </a>
+      <a
+        href="/tesgayabelajar"
+        class="text-2xl font-medium text-blue-500 max-md:text-xl hover:text-blue-600 transition-colors"
+      >
         Tes Gaya Belajar
-      </Link>
-      <Link href="/gaya-belajar" class="text-xl font-medium text-blue-500 hover:text-blue-700 transition-colors duration-300">
-        Gaya Belajar
-      </Link>
-      <Link href="/kontak" class="text-xl font-medium text-blue-500 hover:text-blue-700 transition-colors duration-300">
+      </a>
+      <a
+        href="/dashboard"
+        class="text-2xl font-medium text-blue-500 max-md:text-xl hover:text-blue-600 transition-colors"
+      >
+        Dashboard
+      </a>
+      <a
+        href="/kontak"
+        class="text-2xl font-medium text-blue-500 max-md:text-xl hover:text-blue-600 transition-colors"
+      >
         Kontak
-      </Link>
-      <button @click="login" class="px-6 py-2 text-xl font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+      </a>
+      <a
+        href="/login"
+        class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full px-8 py-3 text-2xl max-md:text-lg max-md:px-5 max-md:py-2 transition-colors"
+      >
         Login
-      </button>
+      </a>
     </nav>
   </header>
 </template>
 
-<script>
-import { Link } from '@inertiajs/vue3';
-import ApplicationLogo from './ApplicationLogo.vue';
-
-export default {
-  name: 'StudySyncHeader',
-  components: {
-    Link,
-  },
-  methods: {
-    login() {
-      this.$inertia.visit('/login');
-    }
-  }
-};
+<script setup lang="ts">
+// Tidak memerlukan script karena menggunakan href langsung
 </script>
