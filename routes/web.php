@@ -36,6 +36,11 @@ Route::get('/Soaluji', function () {
     return Inertia::render('Soaluji');
 })->name('Soaluji');
 
+// Halaman tes gaya belajar
+Route::get('/gayabelajar', function () {
+    return Inertia::render('gayabelajar');
+})->name('gayabelajar');
+
 // Rute untuk autentikasi dan profil
 Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

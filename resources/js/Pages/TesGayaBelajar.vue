@@ -1,25 +1,3 @@
-<script>
-import HeaderContent from '@/components/HeaderContent.vue';
-import FooterContent from '@/components/FooterContent.vue';
-
-export default {
-  components: {
-    HeaderContent,
-    FooterContent,
-  },
-  methods: {
-    startTest() {
-      console.log('Tes dimulai!');
-      // Arahkan ke halaman tes atau lakukan aksi lainnya
-    },
-  },
-};
-</script>
-
-<style scoped>
-/* Tambahkan CSS khusus di sini jika diperlukan */
-</style>
-
 <template>
   <div class="min-h-screen bg-gray-50">
     <HeaderContent />
@@ -34,12 +12,12 @@ export default {
           <p class="text-gray-600 mb-8 text-lg">
             Temukan gaya belajar yang paling cocok untuk Anda! Ikuti tes ini untuk mendapatkan wawasan tentang cara belajar yang paling efektif.
           </p>
-          <button 
-            @click="startTest" 
+          <a 
+            href="/Soaluji" 
             class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
             Mulai Tes
-          </button>
+          </a>
         </div>
         <div class="flex justify-center items-center">
           <div class="relative w-full max-w-md">
@@ -95,3 +73,24 @@ export default {
     <FooterContent />
   </div>
 </template>
+
+<script>
+import HeaderContent from '@/components/HeaderContent.vue';
+import FooterContent from '@/components/FooterContent.vue';
+
+export default {
+  components: {
+    HeaderContent,
+    FooterContent,
+  },
+  methods: {
+    MulaiTes() {
+      this.$router.push({ name: 'Soaluji' }); // Arahkan ke halaman Soaluji
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Tambahkan CSS khusus di sini jika diperlukan */
+</style>

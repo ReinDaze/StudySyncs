@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LandingPage from '../Pages/LandingPage.vue'; // Pastikan path ini benar
 import TesGayaBelajar from '../Pages/TesGayaBelajar.vue'; // Pastikan path ini benar
 import Dashboard from '../Pages/Dashboard.vue'; // Import Dashboard
-import kontak from '../Pages/kontak.vue'; // Import kontak
-import Soaluji from '../Pages/Soaluji.vue'; 
+import Gayabelajar from '../resources/js/Pages/gayabelajar.vue';
 
 const routes = [
   {
@@ -30,6 +29,11 @@ const routes = [
     path: '/Soaluji',
     name: 'Soaluji',
     component: Dashboard,
+  },
+  {
+    path: '/gayabelajar',
+    name: 'gayabelajar',
+    component: gayabelajar,
   },
 ];
 

@@ -12,6 +12,7 @@ import UserProfile from './Components/UserProfile.vue';
 import TesGayaBelajar from './Pages/TesGayaBelajar.vue'; // pastikan .vue ditambahkan
 import Dashboard from './Pages/Dashboard.vue'; // pastikan .vue ditambahkan
 import Soaluji from './Pages/Soaluji.vue'; // pastikan .vue ditambahkan
+import gayabelajar from './Pages/gayabelajar.vue'; // pastikan .vue ditambahkan
 
 // Nama aplikasi
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -41,7 +42,7 @@ createInertiaApp({
         vueApp.component('TesGayaBelajar', TesGayaBelajar); // Daftarkan TesGayaBelajar
         vueApp.component('Dashboard', Dashboard); 
         vueApp.component('Soaluji', Soaluji); 
-
+        vueApp.component('gayabelajar', gayabelajar); 
         // Mount ke elemen DOM
         vueApp.mount(el);
     },

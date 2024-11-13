@@ -10,7 +10,12 @@
 
     <!-- Learning Style Percentage Overview -->
     <section class="bg-white p-6 rounded-lg shadow-md lg:col-span-1 md:col-span-1">
-      <LearningHistory />
+      <h2 class="text-xl font-bold mb-4">Learning Style Results</h2>
+      <div class="text-center">
+        <div class="text-lg font-semibold mb-2">Visual: {{ visualPercent }}%</div>
+        <div class="text-lg font-semibold mb-2">Auditory: {{ auditoriPercent }}%</div>
+        <div class="text-lg font-semibold mb-2">Kinesthetic: {{ kinestetikPercent }}%</div>
+      </div>
     </section>
 
     <!-- Biodata Section -->
@@ -20,7 +25,7 @@
 
     <!-- Tips Section -->
     <section class="bg-white p-6 rounded-lg shadow-md lg:col-span-2 md:col-span-2">
-      <TipsCard v-if="showTips"/>
+      <TipsCard v-if="showTips" :learningStyle="learningStyle" />
     </section>
 
     <!-- Footer -->
@@ -55,13 +60,40 @@ export default {
       showHeader: true,
       showFooter: true,
       showTips: true,
+      visualPercent: 0,
+      auditoriPercent: 0,
+      kinestetikPercent: 0,
+      learningStyle: '', // Visual, Auditori, or Kinestetik based on the highest percentage
     }
   },
 
   methods: {
     isCurrentRoute(path) {
       return this.$page.url === path
+    },
+    fetchLearningResults() {
+      // Assume this data is passed as query parameters when redirected after the quiz
+      const urlParams = new URLSearchParams(window.location.search);
+      this.visualPercent = parseInt(urlParams.get('visual'), 10) || 0;
+      this.auditoriPercent = parseInt(urlParams.get('auditori'), 10) || 0;
+      this.kinestetikPercent = parseInt(urlParams.get('kinestetik'), 10) || 0;
+
+      this.setLearningStyle();
+    },
+    setLearningStyle() {
+      const maxPercent = Math.max(this.visualPercent, this.auditoriPercent, this.kinestetikPercent);
+      if (maxPercent === this.visualPercent) {
+        this.learningStyle = 'Visual';
+      } else if (maxPercent === this.auditoriPercent) {
+        this.learningStyle = 'Auditory';
+      } else if (maxPercent === this.kinestetikPercent) {
+        this.learningStyle = 'Kinesthetic';
+      }
     }
+  },
+
+  mounted() {
+    this.fetchLearningResults(); // Fetch results after mounting the component
   }
 }
 </script>
@@ -100,5 +132,30 @@ export default {
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+/* Additional styles for better layout and responsiveness */
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 </style>

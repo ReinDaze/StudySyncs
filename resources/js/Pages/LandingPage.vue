@@ -86,6 +86,31 @@ export default {
           </div>
         </div>
       </section>
+
+      <!-- Feature 1 -->
+    <section class="flex flex-col w-full bg-white bg-opacity-80 max-md:max-w-full">
+      <div class="flex flex-col justify-center items-center px-20 py-72 w-full bg-white bg-opacity-80 max-md:px-5 max-md:py-24 max-md:max-w-full">
+        <div class="flex flex-col mb-0 ml-14 max-w-full w-[1131px] max-md:mb-2.5">
+          <div class="max-w-full w-[504px]">
+            <div class="flex gap-5 max-md:flex-col">
+              <div class="flex flex-col w-[59%] max-md:ml-0 max-md:w-full">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9366db073a052b7551ffd94ac58ac3d421b6c41fcb84e3277a596e93c8a8131b?placeholderIfAbsent=true&apiKey=4403a8f96f2f4610a2aa817af3063966" alt="Visual learning concept illustration" class="object-contain grow w-full aspect-square max-md:mt-9" />
+              </div>
+              <div class="flex flex-col ml-5 w-[41%] max-md:ml-0 max-md:w-full">
+                <h1 class="mt-40 text-7xl font-semibold text-blue-500 max-md:mt-10 max-md:text-4xl">
+                  Visual
+                </h1>
+              </div>
+            </div>
+          </div>
+          <p class="mt-7 text-4xl text-blue-500 max-md:max-w-full">
+            Seseorang dengan gaya belajar visual mengandalkan penglihatan sebagai cara utama untuk memahami informasi. Orang dengan gaya ini cenderung lebih mudah memahami grafik, diagram, gambar, dan video.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
   
       <FooterContent />
     </div>
