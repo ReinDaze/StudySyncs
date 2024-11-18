@@ -13,6 +13,7 @@ import TesGayaBelajar from './Pages/TesGayaBelajar.vue'; // pastikan .vue ditamb
 import Dashboard from './Pages/Dashboard.vue'; // pastikan .vue ditambahkan
 import Soaluji from './Pages/Soaluji.vue'; // pastikan .vue ditambahkan
 import gayabelajar from './Pages/gayabelajar.vue'; // pastikan .vue ditambahkan
+import '@fortawesome/fontawesome-free/css/all.css';
 
 // Nama aplikasi
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

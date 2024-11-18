@@ -41,6 +41,11 @@ Route::get('/gayabelajar', function () {
     return Inertia::render('gayabelajar');
 })->name('gayabelajar');
 
+// Halaman tes gaya belajar
+Route::get('/Bantuan', function () {
+    return Inertia::render('Bantuan');
+})->name('Bantuan');
+
 // Rute untuk autentikasi dan profil
 Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -35,6 +35,11 @@ const routes = [
     name: 'gayabelajar',
     component: gayabelajar,
   },
+  {
+    path: '/Bantuan',
+    name: 'Bantuan',
+    component: Bantuan,
+  },
 ];
 
 const router = createRouter({
