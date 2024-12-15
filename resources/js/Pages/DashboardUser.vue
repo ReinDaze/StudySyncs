@@ -1,10 +1,10 @@
 <template>
   <SidebarLayout>
     <div class="container mx-auto py-8 px-4 z-20">
-      <!-- Grid Layout untuk 4 bagian: Kiri Atas, Kanan Atas, Kiri Bawah, Kanan Bawah -->
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6">
 
-        <!-- Kiri Atas: Profil Pengguna -->
+      
         <div class="max-w-full w-full bg-white shadow-lg rounded-lg p-8">
           <p class="text-xl font-semibold text-gray-800">Profil Pengguna</p>
           <p class="text-lg font-medium text-gray-600">{{ user.name }}</p>
@@ -12,19 +12,19 @@
             <p class="text-sm font-medium text-gray-500">Gaya Belajar Terakhir:</p>
             <div v-if="learningHistory && learningHistory.length > 0">
               <div v-for="history in learningHistory.slice(0, 1)" :key="history.id">
-                <!-- Flexbox untuk gaya belajar terakhir -->
+                
                 <div class="flex justify-center space-x-8 mt-4">
-                  <!-- Visual -->
+                  
                   <div class="flex-1 text-center">
                     <p class="text-2xl font-semibold text-blue-500">{{ history.visual_score }}%</p>
                     <p class="text-sm text-gray-600">Visual</p>
                   </div>
-                  <!-- Auditori -->
+                  
                   <div class="flex-1 text-center">
                     <p class="text-2xl font-semibold text-blue-500">{{ history.auditori_score }}%</p>
                     <p class="text-sm text-gray-600">Auditori</p>
                   </div>
-                  <!-- Kinestetik -->
+                  
                   <div class="flex-1 text-center">
                     <p class="text-2xl font-semibold text-blue-500">{{ history.kinestetik_score }}%</p>
                     <p class="text-sm text-gray-600">Kinestetik</p>
@@ -47,7 +47,7 @@
     </div>
 
 
-    <!-- Kanan Atas: Biodata -->
+    
     <div class="max-w-full w-full bg-white shadow-lg rounded-lg p-8">
       <p class="text-xl font-semibold text-gray-800">Biodata</p>
       <div class="space-y-4 mt-4">
@@ -60,38 +60,38 @@
       </div>
     </div>
 
-    <!-- Kiri Bawah: Riwayat Gaya Belajar -->
+    
     <div class="max-w-full w-full bg-white shadow-lg rounded-lg p-8">
       <p class="text-xl font-semibold text-gray-800 mb-4">Riwayat Gaya Belajar</p>
       <div class="space-y-4">
         <div v-for="history in learningHistory" :key="history.id" class="bg-white shadow-md rounded-lg p-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <!-- Icon Gaya Belajar -->
+    
               <div class="w-12 h-12 rounded-full bg-blue-500 flex justify-center items-center">
                 <img :src="getIcon(history.dominant_style)" alt="icon" class="w-8 h-8" />
               </div>
-              <!-- Tipe Gaya Belajar dan Persentase -->
+    
               <div class="ml-4">
                 <p class="text-lg font-semibold text-gray-700">{{ history.dominant_style }}</p>
                 <p class="text-sm text-gray-500">Persentase: {{ getHighestPercentage(history) }}%</p>
               </div>
             </div>
-            <!-- Tanggal -->
+    
             <p class="text-sm text-gray-500">{{ formatDate(history.created_at) }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Kanan Bawah: Tips and Trick Gaya Belajar -->
+    
     <div class="max-w-full w-full bg-white shadow-lg rounded-lg p-8">
       <p class="text-xl font-semibold text-gray-800 mb-4">Tips and Trick Gaya Belajar</p>
       <div class="space-y-4">
         <div class="space-y-6">
-          <div v-for="style in ['Visual', 'Auditori', 'Kinestetik']" :key="style" class="bg-gray-200 p-4 rounded-lg">
-            <h3 class="font-semibold text-gray-800">{{ style }} Style</h3>
-            <p class="text-sm text-gray-600 mt-2">{{ getTips(style) }}</p>
+          <div v-for="style in ['Visual', 'Auditori', 'Kinestetik']" :key="style" class="bg-blue-600 p-4 rounded-lg">
+            <h3 class="font-bold text-white">{{ style }} Style</h3>
+            <p class="text-sm text-white mt-2">{{ getTips(style) }}</p>
           </div>
         </div>
       </div>

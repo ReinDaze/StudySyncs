@@ -18,7 +18,7 @@
               type="radio"
               :id="'jawaban-' + soal.id + '-' + idx"
               :name="'jawaban-' + soal.id"
-              :value="'jawaban_' + (idx + 1)" 
+              :value="'jawaban_' + (idx + 1)"
               v-model="answers[soal.id]"
               class="mr-2"
             />
@@ -45,9 +45,11 @@
           Next Page
         </button>
 
+        <!-- Submit Button with Disabled State if Not All Answered -->
         <button
           v-else
           @click="submitAnswers"
+          :disabled="isSubmitDisabled"
           class="bg-green-500 text-white px-4 py-2 rounded"
         >
           Submit
@@ -58,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { usePage, router } from '@inertiajs/vue3';
 import MainLayout from '@/Layouts/MainLayout.vue';
 
@@ -66,24 +68,53 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 const { props } = usePage();
 const questions = props.soals || []; // Assuming this contains the structure [{ id, soal, jawaban_options: [option1, option2, ...] }, ...]
 
-// State variables
 const answers = ref({}); // Stores selected answer for each question
 const currentPage = ref(1);
 const questionsPerPage = 10;
 
+let shuffledQuestions = ref([]);
+
+// Shuffle function to randomize an array (Fisher-Yates Algorithm)
+const shuffleArray = (arr) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+  }
+  return arr;
+};
+
+// Shuffle questions and answers only once on component mount
+onMounted(() => {
+  // Shuffle the questions and take only 30 questions
+  shuffledQuestions.value = shuffleArray(questions).slice(0, 30);
+
+  // Shuffle answers for each question
+  shuffledQuestions.value.forEach((soal) => {
+    soal.jawaban_options = shuffleArray(soal.jawaban_options);
+  });
+});
+
 // Calculate total pages based on the number of questions
-const totalPages = Math.ceil(questions.length / questionsPerPage);
+const totalPages = computed(() => {
+  return Math.ceil(shuffledQuestions.value.length / questionsPerPage);
+});
 
 // Computed property to get questions for the current page
 const paginatedSoals = computed(() => {
   const start = (currentPage.value - 1) * questionsPerPage;
   const end = start + questionsPerPage;
-  return questions.slice(start, end);
+  return shuffledQuestions.value.slice(start, end);
+});
+
+// Computed property to check if all questions have been answered
+const isSubmitDisabled = computed(() => {
+  // Check if there are any unanswered questions
+  return Object.keys(answers.value).length < shuffledQuestions.value.length;
 });
 
 // Methods
 const nextPage = () => {
-  if (currentPage.value < totalPages) {
+  if (currentPage.value < totalPages.value) {
     currentPage.value++;
   }
 };
@@ -112,7 +143,6 @@ const submitAnswers = () => {
     },
   });
 };
-
 </script>
 
 <style scoped>

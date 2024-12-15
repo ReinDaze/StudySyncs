@@ -23,10 +23,13 @@ class SoalFactory extends Factory
             'soal' => $this->faker->sentence,
             'jawaban_1' => $this->faker->word,
             'gaya_belajar_1' => 'Visual',
+            'nilai_jawaban_1' => $this->faker->numberBetween(1, 10),
             'jawaban_2' => $this->faker->word,
             'gaya_belajar_2' => 'Auditori',
+            'nilai_jawaban_2' => $this->faker->numberBetween(1, 10),
             'jawaban_3' => $this->faker->word,
             'gaya_belajar_3' => 'Kinestetik',
+            'nilai_jawaban_3' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

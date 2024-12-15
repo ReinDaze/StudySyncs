@@ -24,6 +24,7 @@
         "inertia": "^0.0.7",
         "vue": "^3.5.12",
         "vue-loader": "^17.4.2",
+        "vue-recaptcha": "^3.0.0-alpha.6",
         "vue-router": "^4.4.5"
     }
 }
