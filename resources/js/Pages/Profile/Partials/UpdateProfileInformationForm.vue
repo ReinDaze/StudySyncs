@@ -29,68 +29,58 @@ const form = useForm({
 </script>
 
 <template>
-    <section class="bg-gray-50 p-8 rounded-lg shadow-lg">
-        <header class="mb-6">
-            <h2 class="text-2xl font-semibold text-gray-900">
-                Profile Information
-            </h2>
-
-            <p class="mt-2 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
-
+    <section>
         <form @submit.prevent="form.patch(route('profile.update'))" class="space-y-6">
             <!-- Name Field -->
             <div class="space-y-2">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Name" class="text-gray-700 font-medium" />
                 <TextInput id="name" type="text"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.name" required autofocus autocomplete="name" />
                 <InputError class="mt-2 text-sm text-red-500" :message="form.errors.name" />
             </div>
 
             <!-- Email Field -->
             <div class="space-y-2">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email" class="text-gray-700 font-medium" />
                 <TextInput id="email" type="email"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.email" required autocomplete="username" />
                 <InputError class="mt-2 text-sm text-red-500" :message="form.errors.email" />
             </div>
 
             <!-- Address Field -->
             <div class="space-y-2">
-                <InputLabel for="address" value="Address" />
+                <InputLabel for="address" value="Address" class="text-gray-700 font-medium" />
                 <TextInput id="address" type="text"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.address" placeholder="Your address" />
                 <InputError class="mt-2 text-sm text-red-500" :message="form.errors.address" />
             </div>
 
             <!-- Phone Field -->
             <div class="space-y-2">
-                <InputLabel for="phone" value="Phone" />
+                <InputLabel for="phone" value="Phone" class="text-gray-700 font-medium" />
                 <TextInput id="phone" type="text"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.phone" placeholder="Your phone number" />
                 <InputError class="mt-2 text-sm text-red-500" :message="form.errors.phone" />
             </div>
 
             <!-- Birthdate Field -->
             <div class="space-y-2">
-                <InputLabel for="birthdate" value="Birthdate" />
+                <InputLabel for="birthdate" value="Birthdate" class="text-gray-700 font-medium" />
                 <TextInput id="birthdate" type="date"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.birthdate" />
                 <InputError class="mt-2 text-sm text-red-500" :message="form.errors.birthdate" />
             </div>
 
             <!-- Asal Sekolah Field -->
             <div class="space-y-2">
-                <InputLabel for="school_origin" value="School Origin" />
+                <InputLabel for="school_origin" value="School Origin" class="text-gray-700 font-medium" />
                 <TextInput id="school_origin" type="text"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="mt-1 block w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     v-model="form.school_origin" placeholder="Enter your school origin" />
                 <InputError :message="form.errors.school_origin" />
             </div>
@@ -98,11 +88,11 @@ const form = useForm({
 
             <!-- Email Verification Reminder (if needed) -->
             <div v-if="mustVerifyEmail && user.email_verified_at === null"
-                class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500">
+                class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
                 <p class="text-sm text-gray-800">
                     Your email address is unverified.
                     <Link :href="route('verification.send')" method="post" as="button"
-                        class="text-sm text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        class="text-sm text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 underline">
                     Click here to re-send the verification email.
                     </Link>
                 </p>
@@ -113,16 +103,16 @@ const form = useForm({
             </div>
 
             <!-- Save Button -->
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing" @click="updateProfilePicture"
-                    class="w-full py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                    Save
+            <div class="flex items-center gap-4 pt-4">
+                <PrimaryButton :disabled="form.processing"
+                    class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium">
+                    Save Changes
                 </PrimaryButton>
 
                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
-                        Saved.
+                    <p v-if="form.recentlySuccessful" class="text-sm text-green-600 font-medium">
+                        Saved successfully!
                     </p>
                 </Transition>
             </div>

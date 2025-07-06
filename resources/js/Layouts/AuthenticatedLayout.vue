@@ -22,7 +22,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="flex shrink-0 items-center">
                                 <Link :href="route('dashboard')">
                                 <div class="flex items-center">
-                                    <img src="../../../public/images/studysync.png" alt="StudySync Logo"
+                                    <img src="/images/studysync.png" alt="StudySync Logo"
                                         class="w-6 h-8 mr-4" />
                                     <h1
                                         class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 animate-pulse">
