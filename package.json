@@ -4,7 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "vercel-build": "npm run build"
+        "vercel-build": "npm run build && npm run copy-to-dist",
+        "copy-to-dist": "if not exist dist mkdir dist && xcopy public dist /E /I /Y"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
