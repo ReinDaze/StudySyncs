@@ -48,8 +48,8 @@
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-gray-800 mb-1">Telepon</h3>
-                  <a href="tel:+6221123456778" class="text-gray-600 hover:text-blue-500 transition-colors">
-                    +62 21 1234 5678
+                  <a href="tel:+6285641646594" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    +62 856-4164-6594
                   </a>
                 </div>
               </div>
@@ -67,8 +67,8 @@
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold text-gray-800 mb-1">Email</h3>
-                  <a href="mailto:info@studysync.id" class="text-gray-600 hover:text-blue-500 transition-colors">
-                    info@studysync.id
+                  <a href="mailto:info@studysync@gmail.com" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    studysync@gmail.com
                   </a>
                 </div>
               </div>
@@ -80,7 +80,7 @@
             <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Hubungi Kami Melalui</h3>
             <div class="flex justify-center space-x-6">
               <!-- Instagram -->
-              <a href="https://instagram.com/studysync.id" 
+              <a href="https://instagram.com/studysync" 
                  class="bg-white p-4 rounded-xl hover:shadow-lg transform transition duration-300 hover:-translate-y-1 group">
                 <div class="flex flex-col items-center space-y-2">
                   <div class="inline-block p-3 bg-blue-500 rounded-full group-hover:bg-pink-500 transition-colors">
@@ -93,7 +93,7 @@
               </a>
               
               <!-- WhatsApp -->
-              <a href="https://wa.me/628123456789" 
+              <a href="https://wa.me/6285641646594" 
                  class="bg-white p-4 rounded-xl hover:shadow-lg transform transition duration-300 hover:-translate-y-1 group">
                 <div class="flex flex-col items-center space-y-2">
                   <div class="inline-block p-3 bg-blue-500 rounded-full group-hover:bg-green-500 transition-colors">

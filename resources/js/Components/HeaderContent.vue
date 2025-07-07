@@ -1,18 +1,7 @@
 <template>
   <header class="relative flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-14 py-4 lg:py-7 w-full bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300">
-    <!-- Left Section: Sidebar Toggle + Logo -->
+    <!-- Left Section: Logo Only -->
     <div class="flex items-center">
-      <!-- Sidebar Toggle Button (hanya tampil di dashboard pages dan mobile) -->
-      <button 
-        v-if="showSidebarToggle"
-        @click="toggleSidebar" 
-        class="md:hidden mr-3 p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
-
       <!-- Logo Section with Animation -->
       <div class="flex items-center group">
         <img 
@@ -273,17 +262,10 @@ export default {
       user: null,
       isMobileMenuOpen: false,
       dropdownOpen: false,
-      sidebarToggleTimeout: null,
     };
   },
   computed: {
-    showSidebarToggle() {
-      // Tampilkan sidebar toggle jika di dashboard user atau profile pages
-      const currentRoute = this.$page.url;
-      return currentRoute.includes('/dashboard-user') || 
-             currentRoute.includes('/profile') || 
-             currentRoute.includes('/riwayat-test');
-    }
+    // Computed properties for header functionality
   },
   mounted() {
     this.user = this.$page.props.auth.user;
@@ -297,9 +279,6 @@ export default {
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
     window.removeEventListener('resize', this.handleResize);
-    if (this.sidebarToggleTimeout) {
-      clearTimeout(this.sidebarToggleTimeout);
-    }
   },
   methods: {
     login() {
@@ -310,16 +289,6 @@ export default {
     },
     closeMobileMenu() {
       this.isMobileMenuOpen = false;
-    },
-    toggleSidebar() {
-      // Debounce untuk mencegah multiple clicks
-      if (this.sidebarToggleTimeout) return;
-      
-      this.sidebarToggleTimeout = setTimeout(() => {
-        // Dispatch custom event untuk sidebar
-        window.dispatchEvent(new CustomEvent('toggle-sidebar'));
-        this.sidebarToggleTimeout = null;
-      }, 100);
     },
     handleClickOutside(event) {
       const header = this.$el;

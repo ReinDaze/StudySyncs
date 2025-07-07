@@ -1,5 +1,86 @@
 <template>
   <SidebarLayout>
+    <!-- Mobile/Tablet Sidebar Dropdown - tampil di atas konten -->
+    <div class="md:hidden bg-white border-b border-gray-200 shadow-sm mb-4">
+      <div class="px-4 py-3">
+        <button 
+          @click="toggleSidebarDropdown"
+          class="w-full flex items-center justify-between p-3 text-blue-500 hover:bg-blue-50 rounded-md transition-all duration-200"
+        >
+          <span class="flex items-center">
+            Menu Dashboard
+          </span>
+          <svg 
+            class="w-5 h-5 transform transition-transform duration-200" 
+            :class="{ 'rotate-180': isSidebarDropdownOpen }"
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <transition
+          enter-active-class="transition-all duration-300 ease-out"
+          enter-from-class="opacity-0 transform -translate-y-2"
+          enter-to-class="opacity-100 transform translate-y-0"
+          leave-active-class="transition-all duration-200 ease-in"
+          leave-from-class="opacity-100 transform translate-y-0"
+          leave-to-class="opacity-0 transform -translate-y-2"
+        >
+          <div v-if="isSidebarDropdownOpen" class="mt-2 space-y-2">
+            <Link 
+              href="/dashboard-user"
+              class="flex items-center text-blue-500 hover:bg-blue-100 p-3 rounded-md transition-colors duration-300"
+              @click="closeSidebarDropdown"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+              </svg>
+              Dashboard
+            </Link>
+
+            <Link 
+              href="/profile"
+              class="flex items-center text-blue-500 hover:bg-blue-100 p-3 rounded-md transition-colors duration-300"
+              @click="closeSidebarDropdown"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+              </svg>
+              Edit Profile
+            </Link>
+
+            <Link 
+              href="/riwayat-test"
+              class="flex items-center text-blue-500 hover:bg-blue-100 p-3 rounded-md transition-colors duration-300 bg-blue-50"
+              @click="closeSidebarDropdown"
+            >
+              <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12a10 10 0 1110 10 10 10 0 01-10-10z"></path>
+              </svg>
+              Riwayat Gaya Belajar
+            </Link>
+
+            <Link 
+              href="/logout" 
+              method="post"
+              class="flex items-center text-red-500 hover:bg-red-100 p-3 rounded-md transition-colors duration-300"
+              @click="closeSidebarDropdown"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+              </svg>
+              Log Out
+            </Link>
+          </div>
+        </transition>
+      </div>
+    </div>
+
     <div class="container mx-auto py-8 px-4">
       <div class="max-w-full w-full bg-white shadow-lg rounded-lg p-8">
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Riwayat Test Gaya Belajar</h2>
@@ -105,9 +186,21 @@
 <script setup>
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
 import { ref } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { usePage, Link } from '@inertiajs/vue3';
 
 const { user, learningHistory } = usePage().props;
+
+// State untuk sidebar dropdown
+const isSidebarDropdownOpen = ref(false);
+
+// Functions untuk sidebar dropdown
+const toggleSidebarDropdown = () => {
+  isSidebarDropdownOpen.value = !isSidebarDropdownOpen.value;
+};
+
+const closeSidebarDropdown = () => {
+  isSidebarDropdownOpen.value = false;
+};
 
 // State to track which test details are visible
 const detailsVisible = ref({});

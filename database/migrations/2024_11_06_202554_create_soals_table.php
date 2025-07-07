@@ -13,9 +13,9 @@ class CreateSoalsTable extends Migration
             $table->string('jawaban_1');
             $table->string('jawaban_2');
             $table->string('jawaban_3');
-            $table->enum('gaya_belajar_1', ['Kinestetik', 'Visual', 'Auditori']);
-            $table->enum('gaya_belajar_2', ['Kinestetik', 'Visual', 'Auditori']);
-            $table->enum('gaya_belajar_3', ['Kinestetik', 'Visual', 'Auditori']);
+            $table->string('gaya_belajar_1')->default('Kinestetik'); // Kinestetik, Visual, Auditori
+            $table->string('gaya_belajar_2')->default('Visual'); // Kinestetik, Visual, Auditori
+            $table->string('gaya_belajar_3')->default('Auditori'); // Kinestetik, Visual, Auditori
             $table->integer('nilai_jawaban_1')->default(0);
             $table->integer('nilai_jawaban_2')->default(0);
             $table->integer('nilai_jawaban_3')->default(0);
